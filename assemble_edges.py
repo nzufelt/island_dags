@@ -14,10 +14,16 @@ locations = [
     'Coral Reef', 'Pirate Bay', 'Volcano Summit', 'Emerald Forest', 'Starfall Valley'
 ]
 
+# Take in a dictionary of routes so far and generate a new, compatable list of routes
+def sample_with_order(routes):
+    return random.sample(locations, 8)
+
+
 # Ensure each location has 0, 1, or 2 visits
 valid = False
+routes = {}
 while not valid:
-    routes = {person: random.sample(locations, 8) for person in people}
+    routes = {person: sample_with_order(routes) for person in people}
     location_counts = {}
     for locs in routes.values():
         for loc in locs:
@@ -37,3 +43,6 @@ random.shuffle(edges)
 # Print all travel statements
 for edge in edges:
     print(edge)
+
+
+print(routes)
